@@ -5,6 +5,7 @@ var time_block,
   dayofweek = ["日)", "月)", "火)", "水)", "木)", "金)", "土)"],
   usTime = !1,
   showTime = !0,
+  useLocaleSunrise = false,
   use24HourClock = !0,
   font = "KosugiMaru-Regular",
   font_weight = "-Regular",
@@ -38,6 +39,9 @@ function formatHours(e) {
 }
 function update() {
   var e = new Date();
+  if (useLocaleSunrise) {
+    getLocation();
+  }
   e.getMinutes() != currentMinute &&
     ((currentMinute = e.getMinutes()), dayCheck()),
     showTime &&
@@ -77,6 +81,32 @@ function dayCheck() {
       : "url(./media/night01.jpg)"),
     (document.body.style.backgroundImage = i);
 }
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setPosition);
+  } else { 
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+function setPosition(position) {
+//   "Latitude:  " + position.coords.latitude + "\n"
+//   "Longitude: " + position.coords.longitude;
+  console.log("Geolocation set as: (" + position.coords.latitude.toString() + ", " + position.coords.longitude.toString() + ")");
+  var times = SunCalc.getTimes(new Date(), position.coords.latitude, position.coords.longitude);
+
+  // format sunrise time from the Date object
+  // var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+  iRise = 60 * (times.sunrise.getHours() % 24) + (times.sunrise.getMinutes() % 60);
+  iRise > 0 && ((sunrise = iRise), (currentMinute = -1));
+
+  // format sunrise time from the Date object
+  // var sunsetStr = times.sunset.getHours() + ':' + times.sunset.getMinutes();
+  iSet = 60 * (times.sunset.getHours() % 24) + (times.sunset.getMinutes() % 60);
+  iSet > 0 && iSet > sunrise && ((sunset = iSet), (currentMinute = -1));
+  // i = 60 * (parseInt(t[0]) % 24) + (parseInt(t[1]) % 60);
+  // i > 0 && i > sunrise && ((sunset = i), (currentMinute = -1));
+
+}
 window.wallpaperPropertyListener = {
   applyUserProperties: function (e) {
     if (
@@ -88,6 +118,11 @@ window.wallpaperPropertyListener = {
       let t = e.sunrise.value.split(":"),
         i = 60 * (parseInt(t[0]) % 24) + (parseInt(t[1]) % 60);
       i > 0 && ((sunrise = i), (currentMinute = -1));
+    }
+    if (e.useLocaleSunrise) {
+      let t = e.useLocaleSunrise.value;
+      getLocation();
+      useLocaleSunrise = t;
     }
     if (e.sunset) {
       let t = e.sunset.value.split(":"),
