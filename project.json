@@ -1,0 +1,183 @@
+{
+	"concentrating" : "Everyone",
+	"contentrating" : "Everyone",
+	"description" : "Tokyo Street Project - JUST UPDATED!!!\n- Should scale for most resolutions\n- Clock always remains above taskbar\n- Option to hide clock\n- Options to change font\n- Options to change font weight\n- Options to change font size\n- Options to change time format 12hr or 24hr\n- Options to change date format (Japanese, Chinese and US formats are supported)\n- SET YOUR LOCAL SUNRISE AND SUNSET TIME!!!\n- SET SUNRISE/SUNSET DURATION!!!\n\nEnjoy!",
+	"file" : "background.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"clockSize" : 
+			{
+				"condition" : "showTime.value",
+				"max" : 5,
+				"min" : 1,
+				"order" : 8,
+				"text" : "Clock Size",
+				"type" : "slider",
+				"value" : 2
+			},
+			"customTime" : 
+			{
+				"condition" : "showTime.value",
+				"options" : 
+				[
+					{
+						"label" : "12h",
+						"value" : false
+					},
+					{
+						"label" : "24h",
+						"value" : true
+					}
+				],
+				"order" : 6,
+				"text" : "Time Format",
+				"type" : "combo",
+				"value" : true
+			},
+			"dateFormat" : 
+			{
+				"condition" : "showTime.value",
+				"options" : 
+				[
+					{
+						"label" : "Japanese",
+						"value" : 1
+					},
+					{
+						"label" : "Chinese",
+						"value" : 2
+					},
+					{
+						"label" : "English",
+						"value" : 3
+					}
+				],
+				"order" : 7,
+				"text" : "Date Format",
+				"type" : "combo",
+				"value" : 1
+			},
+			"fontType" : 
+			{
+				"condition" : "showTime.value",
+				"options" : 
+				[
+					{
+						"label" : "Kosugi Maru",
+						"value" : 1
+					},
+					{
+						"label" : "Kosugi",
+						"value" : 2
+					},
+					{
+						"label" : "Sawarabi Mincho",
+						"value" : 3
+					},
+					{
+						"label" : "M PLUS 1p",
+						"value" : 4
+					},
+					{
+						"label" : "M PLUS Rounded 1c",
+						"value" : 5
+					},
+					{
+						"label" : "NotoSansJP",
+						"value" : 6
+					},
+					{
+						"label" : "NotoSerifJP",
+						"value" : 7
+					}
+				],
+				"order" : 9,
+				"text" : "Font",
+				"type" : "combo",
+				"value" : 1
+			},
+			"fontWeight" : 
+			{
+				"condition" : "fontType.value >= 4 && showTime.value",
+				"options" : 
+				[
+					{
+						"label" : "Thin",
+						"value" : "-Thin"
+					},
+					{
+						"label" : "Light",
+						"value" : "-Light"
+					},
+					{
+						"label" : "Regular",
+						"value" : "-Regular"
+					},
+					{
+						"label" : "Medium",
+						"value" : "-Medium"
+					}
+				],
+				"order" : 10,
+				"text" : "Font Weight",
+				"type" : "combo",
+				"value" : "-Regular"
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"showTime" : 
+			{
+				"order" : 5,
+				"text" : "Show Time",
+				"type" : "bool",
+				"value" : true
+			},
+			"useLocaleSunrise" : 
+			{
+				"order" : 1,
+				"text" : "Use Locale sunrise and sun set",
+				"type" : "bool",
+				"value" : true
+			},
+			"sunrise" : 
+			{
+				"condition" : "!useLocaleSunrise.value",
+				"order" : 2,
+				"text" : "Sunrise (hh:mm)",
+				"type" : "textinput",
+				"value" : "6:05"
+			},
+			"sunriseTime" : 
+			{
+				"condition" : "!useLocaleSunrise.value",
+				"order" : 4,
+				"text" : "Duration (max 240 mins)",
+				"type" : "textinput",
+				"value" : "10"
+			},
+			"sunset" : 
+			{
+				"condition" : "!useLocaleSunrise.value",
+				"order" : 3,
+				"text" : "Sunset (hh:mm)",
+				"type" : "textinput",
+				"value" : "19:15"
+			}
+		}
+	},
+	"preview" : "preview.jpg",
+	"tags" : [ "Anime" ],
+	"title" : "Tokyo Street with Day Night Cycle and Clock - UPDATED!",
+	"type" : "Web",
+	"version" : 1,
+	"visibility" : "public",
+	"workshopid" : "1685364754",
+	"workshopurl" : "steam://url/CommunityFilePage/1685364754"
+}
